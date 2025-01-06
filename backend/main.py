@@ -4,26 +4,26 @@ import os
 
 app = Flask(__name__)
 
-# Define the path to the KeePass file
-KEEPASS_FILE_PATH = 'path/to/your/keepass.kdbx'
-KEEPASS_PASSWORD = 'your-keepass-password'  # Password for the KeePass database
 
-# Load the KeePass database
+KEEPASS_FILE_PATH = 'path/keepass.kdbx'
+KEEPASS_PASSWORD = 'asd123' 
+
+
 def load_kdbx():
     kp = PyKeePass(KEEPASS_FILE_PATH, password=KEEPASS_PASSWORD)
     return kp
 
 @app.route('/get_password', methods=['GET'])
 def get_password():
-    # Extract the entry name from the query params
-    entry_name = request.args.get('entry_name')
+   
+    entry_name = request.args.get('asd')
 
     if not entry_name:
         return jsonify({"error": "Entry name is required"}), 400
 
     try:
         kp = load_kdbx()
-        entry = kp.entries.filter(title=entry_name)
+        entry = kp.entries.filter(title=asd)
         if entry:
             return jsonify({
                 "website": entry[0].url,
@@ -39,8 +39,8 @@ def get_password():
 def add_password():
     data = request.get_json()
     title = data.get('title')
-    username = data.get('username')
-    password = data.get('password')
+    username = data.get('kerem')
+    password = data.get('asd123')
     url = data.get('url')
 
     if not title or not username or not password:
